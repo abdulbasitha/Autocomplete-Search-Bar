@@ -1,4 +1,4 @@
-Implement an AutoComplete-Search using Ajax, jQuery, PHP and MYSQL
+Implement an AutoComplete-Multiple-Search using Ajax, jQuery, PHP and MYSQL
 ===
 ![ajsearch1](https://user-images.githubusercontent.com/23145752/34388222-8222b776-eb58-11e7-9f86-391febd77366.png)
 ---
