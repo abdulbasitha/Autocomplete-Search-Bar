@@ -50,11 +50,9 @@
                     <label>Search a country by name</label>
                 </center>
                 <br><br>
-                <input type="text" id="searchBoxf" name="searchBoxf" class="form-control" autocomplete="off" placeholder="Type name of a country" required="required">
-                <div id="resultf">
-                    
-                </div>
-                 <input type="text" id="searchBoxt" name="searchBoxt" class="form-control" autocomplete="off" placeholder="Type name of a country" required="required">
+                <input data-id="1" type="text"  id="searchBoxf" name="searchBoxf" class="form-control" autocomplete="off" placeholder="Type name of a country" required="required">
+                <div id="resultf"></div>
+                 <input data-id="2" type="text" id="searchBoxt" name="searchBoxt" class="form-control" autocomplete="off" placeholder="Type name of a country" required="required">
                 <div id="resultt"></div>
                 <center>
                     <button class="btn btn-primary">Search</button>
@@ -67,8 +65,16 @@
     </div>
     <script>
         $(document).ready(function(){
-            $('#searchBoxf').keyup(function(){
+            $('.form-control').keyup(function(){
+               var click=$(this).data("id")
+                if(($(this).data("id"))==1) {
                 var query = $('#searchBoxf').val();
+                var id = "lif";
+                }
+                else{
+                var query = $('#searchBoxt').val();
+                var id = "lit";
+                }
 
                 if(query.length>0){
                     $.ajax({
@@ -76,53 +82,71 @@
                         method: "POST",
                         data: {
                            search : 1,
-                           q: query 
+                           q: query ,
+                           id_pass:id
                         },
                         success:function(data){
-                            $('#resultf').html(data);
+                            // (($(this).data("id"))==1) ? $('#resultf').html(data): $('#resultt').html(data)
+                            if(click==1){
+                             $('#resultf').html(data)
+                            }
+                            else{
+                                $('#resultt').html(data) 
+                            }
+
+
                         },
                         dataType: "text"
                     });
                 }
-            });
 
-            $(document).on('click', '#lif', function(){
-
+                if(click==1){
+                $(document).on('click', '#lif', function(){
                 var country = $(this).text();
                 $('#searchBoxf').val(country);
                 $('#resultf').html("");
 
             });
-        });
+            }
 
-        $(document).ready(function(){
-            $('#searchBoxt').keyup(function(){
-                var query = $('#searchBoxt').val();
-
-                if(query.length>0){
-                    $.ajax({
-                        url: "fetcht.php",
-                        method: "POST",
-                        data: {
-                           search : 1,
-                           q: query 
-                        },
-                        success:function(data){
-                            $('#resultt').html(data);
-                        },
-                        dataType: "text"
-                    });
-                }
-            });
-
-            $(document).on('click', '#lit', function(){
+            else{
+                $(document).on('click', '#lit', function(){
 
                 var country = $(this).text();
                 $('#searchBoxt').val(country);
                 $('#resultt').html("");
 
             });
+            }
+
+            });
+
+            // $('#searchBoxt').keyup(function(){
+            //     var query = $('#searchBoxt').val();
+            //     var id = "lit";
+            //     if(query.length>0){
+            //         $.ajax({
+            //             url: "fetch.php",
+            //             method: "POST",
+            //             data: {
+            //                search : 1,
+            //                q: query ,
+            //                id_pass:id
+            //             },
+            //             success:function(data){
+            //                 $('#resultt').html(data);
+            //             },
+            //             dataType: "text"
+            //         });
+            //     }
+            // });
+
+           
+
+            
         });
+
+        
 
     </script>
     

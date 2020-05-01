@@ -18,7 +18,7 @@ if(isset($_POST['search'])){
         // Display fetched all countries matched with the entered phrase
         while($row = mysqli_fetch_assoc($res)){
             // Concatenate the results to the previously started list
-            $response .= "<li style='height: 50px;' id='lif' class='list-group-item'>".$row['country']."</li>";
+            $response .= "<li style='height: 50px;' id='".$_POST['id_pass']."' class='list-group-item'>".$row['country']."</li>";
         }
         // End the styling for fetch country list
         $response .= "</ul>";
